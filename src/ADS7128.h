@@ -84,7 +84,7 @@
 #endif
 
 // Pin modes
-enum PinMode {
+enum ADS7128PinMode {
     PIN_MODE_ANALOG_INPUT = 0,
     PIN_MODE_DIGITAL_INPUT = 1,
     PIN_MODE_DIGITAL_OUTPUT = 2,
@@ -125,8 +125,8 @@ public:
     bool clearPowerOnResetFlag();
     
     // Pin configuration
-    bool setPinMode(uint8_t pin, PinMode mode);
-    PinMode getPinMode(uint8_t pin);
+    bool setPinMode(uint8_t pin, ADS7128PinMode mode);
+    ADS7128PinMode getPinMode(uint8_t pin);
     
     // Drive mode configuration (for output pins)
     bool setDriveMode(uint8_t pin, DriveMode mode);

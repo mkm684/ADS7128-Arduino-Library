@@ -128,7 +128,7 @@ bool ADS7128::begin(TwoWire &wirePort) {
  * @return true  Configuration written successfully.
  * @return false Pin number out of range (> 7).
  */
-bool ADS7128::setPinMode(uint8_t pin, PinMode mode) {
+bool ADS7128::setPinMode(uint8_t pin, ADS7128PinMode mode) {
     if (pin > 7) return false;
     
     switch (mode) {
@@ -375,7 +375,7 @@ bool ADS7128::clearPowerOnResetFlag() {
  * @return PIN_MODE_DIGITAL_OUTPUT Pin is configured as a GPIO output.
  * @return PIN_MODE_INVALID        Pin number out of range (> 7).
  */
-PinMode ADS7128::getPinMode(uint8_t pin) {
+ADS7128PinMode ADS7128::getPinMode(uint8_t pin) {
     if (pin > 7) return PIN_MODE_INVALID;
     
     uint8_t pinCfg = readRegister(ADS7128_REG_PIN_CFG);
@@ -558,7 +558,7 @@ bool ADS7128::enableManualMode() {
     bool success = writeRegister(ADS7128_REG_GENERAL_CFG, reg);           // Enable STATES registers
 
     // Configure for manual mode
-    bool success = writeRegister(ADS7128_REG_OPMODE_CFG, 0x00);    // CONV_MODE=0 (manual)
+    success &= writeRegister(ADS7128_REG_OPMODE_CFG, 0x00);    // CONV_MODE=0 (manual)
     success &= writeRegister(ADS7128_REG_SEQUENCE_CFG, 0x00);  // SEQ_MODE=0 (manual), SEQ_START=0
 
     systemState.autoMode = 0;
